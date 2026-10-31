@@ -1,1127 +1,1075 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BAHLOU // DIGITAL PLATFORM DIRECTORY</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              nothingBlack: "#000000",
-              nothingCard: "#111111",
-              nothingCardHover: "#161616",
-              nothingBorder: "#222222",
-              nothingBorderHover: "#333333",
-              nothingRed: "#d71921",
-              nothingRedHover: "#ef232a",
-              nothingGray: "#888888",
-              nothingLightGray: "#cccccc",
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nothingBlack: "#000000",
+                        nothingCard: "#111111",
+                        nothingCardHover: "#161616",
+                        nothingBorder: "#222222",
+                        nothingBorderHover: "#333333",
+                        nothingRed: "#d71921",
+                        nothingRedHover: "#ef232a",
+                        nothingGray: "#888888",
+                        nothingLightGray: "#cccccc",
+                    },
+                },
             },
-          },
-        },
-      };
+        };
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet" />
     <style>
-      body {
-        font-family: "Space Grotesk", sans-serif;
-        background-color: #000000;
-        color: #ffffff;
-      }
-      .mono-font {
-        font-family: "JetBrains Mono", monospace;
-      }
-      ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #000000;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #222222;
-        border-radius: 0px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #333333;
-      }
-      .dot-grid {
-        background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-        background-size: 24px 24px;
-      }
+        body {
+            font-family: "Space Grotesk", sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .mono-font {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #222222;
+            border-radius: 0px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333333;
+        }
+
+        .dot-grid {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
     </style>
-  </head>
-  <body
-    class="bg-nothingBlack text-white min-h-screen flex flex-col antialiased selection:bg-nothingRed selection:text-white dot-grid"
-  >
+</head>
+
+<body
+    class="bg-nothingBlack text-white min-h-screen flex flex-col antialiased selection:bg-nothingRed selection:text-white dot-grid">
     <!-- TOAST NOTIFICATION -->
-    <div
-      id="toast"
-      class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-2rem)] transform translate-y-24 opacity-0 transition-all duration-200 bg-nothingCard border border-nothingBorder text-white px-4 py-3 sm:px-5 rounded-[4px] shadow-2xl flex items-center gap-3"
-    >
-      <span class="w-2 h-2 bg-nothingRed rounded-full shrink-0"></span>
-      <span
-        id="toast-message"
-        class="mono-font text-[10px] sm:text-xs tracking-wider uppercase font-bold text-nothingLightGray"
-        >ACTION SUCCESSFUL</span
-      >
+    <div id="toast"
+        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-[calc(100vw-2rem)] transform translate-y-24 opacity-0 transition-all duration-200 bg-nothingCard border border-nothingBorder text-white px-4 py-3 sm:px-5 rounded-[4px] shadow-2xl flex items-center gap-3">
+        <span class="w-2 h-2 bg-nothingRed rounded-full shrink-0"></span>
+        <span id="toast-message"
+            class="mono-font text-[10px] sm:text-xs tracking-wider uppercase font-bold text-nothingLightGray">ACTION
+            SUCCESSFUL</span>
     </div>
 
     <!-- STICKY BLURRED HEADER -->
-    <header
-      class="sticky top-0 z-40 border-b border-nothingBorder bg-nothingBlack/95 backdrop-blur-md"
-    >
-      <div
-        class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-3"
-      >
-        <div class="min-w-0 flex items-center gap-2 sm:gap-3">
-          <span
-            class="w-8 h-8 sm:w-9 sm:h-9 bg-nothingRed flex items-center justify-center rounded-[4px] text-black font-black text-sm sm:text-base mono-font shrink-0"
-            >B</span
-          >
-          <div class="min-w-0">
-            <h1
-              class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white truncate"
-            >
-              BAHLOU_DIRECTORY
-            </h1>
-            <p
-              class="mono-font text-[9px] sm:text-[10px] text-nothingGray uppercase tracking-wider hidden xs:block sm:block"
-            >
-              ECOSYSTEM_CONTROLLER
-            </p>
-          </div>
-        </div>
+    <header class="sticky top-0 z-40 border-b border-nothingBorder bg-nothingBlack/95 backdrop-blur-md">
+        <div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-3">
+            <div class="min-w-0 flex items-center gap-2 sm:gap-3">
+                <span
+                    class="w-8 h-8 sm:w-9 sm:h-9 bg-nothingRed flex items-center justify-center rounded-[4px] text-black font-black text-sm sm:text-base mono-font shrink-0">B</span>
+                <div class="min-w-0">
+                    <h1 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white truncate">
+                        BAHLOU_DIRECTORY
+                    </h1>
+                    <p
+                        class="mono-font text-[9px] sm:text-[10px] text-nothingGray uppercase tracking-wider hidden xs:block sm:block">
+                        ECOSYSTEM_CONTROLLER
+                    </p>
+                </div>
+            </div>
 
-        <!-- SEARCH BAR -->
-        <div class="flex-1 max-w-md mx-2 hidden md:block">
-          <div class="relative flex items-center">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 text-nothingGray text-xs"></i>
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="SEARCH SITES, APPS, ENVIRONMENTS..."
-              onkeyup="filterCards()"
-              class="mono-font w-full bg-nothingCard border border-nothingBorder hover:border-nothingBorderHover focus:border-nothingRed rounded-[6px] py-1.5 pl-8 pr-3 text-[11px] text-white placeholder-nothingGray focus:outline-none transition uppercase"
-            />
-          </div>
-        </div>
+            <!-- SEARCH BAR -->
+            <div class="flex-1 max-w-md mx-2 hidden md:block">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 text-nothingGray text-xs"></i>
+                    <input type="text" id="searchInput" placeholder="SEARCH SITES, APPS, ENVIRONMENTS..."
+                        onkeyup="filterCards()"
+                        class="mono-font w-full bg-nothingCard border border-nothingBorder hover:border-nothingBorderHover focus:border-nothingRed rounded-[6px] py-1.5 pl-8 pr-3 text-[11px] text-white placeholder-nothingGray focus:outline-none transition uppercase" />
+                </div>
+            </div>
 
-        <div class="flex items-center gap-2 shrink-0">
-          <a
-            href="https://github.com/Mukund2074"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="GitHub: Mukund2074"
-            class="mono-font text-[10px] sm:text-xs bg-nothingCard hover:bg-nothingCardHover text-nothingLightGray hover:text-white border border-nothingBorder hover:border-neutral-700 px-3 py-1.5 rounded-[4px] flex items-center gap-2 font-bold transition"
-          >
-            <i class="fa-brands fa-github text-xs"></i>
-            <span class="hidden sm:inline">Mukund2074</span>
-          </a>
-          <div
-            class="mono-font text-[10px] sm:text-xs bg-nothingCard text-nothingLightGray border border-nothingBorder px-3 py-1.5 rounded-[4px] flex items-center gap-2 font-bold"
-          >
-            <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-            <span id="activeCountBadge">13 ENDPOINTS</span>
-          </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <a href="https://github.com/Mukund2074" target="_blank" rel="noopener noreferrer"
+                    title="GitHub: Mukund2074"
+                    class="mono-font text-[10px] sm:text-xs bg-nothingCard hover:bg-nothingCardHover text-nothingLightGray hover:text-white border border-nothingBorder hover:border-neutral-700 px-3 py-1.5 rounded-[4px] flex items-center gap-2 font-bold transition">
+                    <i class="fa-brands fa-github text-xs"></i>
+                    <span class="hidden sm:inline">Mukund2074</span>
+                </a>
+                <div
+                    class="mono-font text-[10px] sm:text-xs bg-nothingCard text-nothingLightGray border border-nothingBorder px-3 py-1.5 rounded-[4px] flex items-center gap-2 font-bold">
+                    <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                    <span id="activeCountBadge">13 ENDPOINTS</span>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
     <!-- MAIN BODY -->
     <main class="flex-grow w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col gap-6 sm:gap-8">
-      
-      <!-- HERO SECTION -->
-      <section class="bg-nothingCard border border-nothingBorder rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 flex flex-col gap-4 relative overflow-hidden">
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-nothingRed rounded-full"></span>
-          <span class="mono-font text-[10px] sm:text-xs text-nothingRed font-bold tracking-widest uppercase">
-            BAHLOU // DIGITAL ECOSYSTEM
-          </span>
-        </div>
-        
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white uppercase mono-font">
-          <span class="text-nothingRed">BAHLOU.</span> NETWORK OF PORTALS.<br/>
-          ENGINEERED FOR CLARITY.
-        </h2>
-        
-        <p class="text-xs sm:text-sm text-nothingGray max-w-3xl leading-relaxed">
-          Centralized directory of production, staging, demo, and integration endpoints for the Bahlou and Fiind platform architecture. Click any card to launch directly into the active system.
-        </p>
 
-        <!-- FILTER BARS (CATEGORIES & ENVIRONMENT) -->
-        <div class="flex flex-col gap-3 pt-4 border-t border-nothingBorder">
-          <!-- CATEGORY FILTERS -->
-          <div class="flex items-center gap-2 overflow-x-auto pb-1">
-            <span class="mono-font text-[9px] text-nothingGray uppercase tracking-wider shrink-0 mr-1">PORTAL:</span>
-            <button
-              onclick="selectCategory('all', this)"
-              class="category-btn mono-font text-[10px] sm:text-xs bg-nothingRed text-black font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap"
-            >
-              ALL (13)
-            </button>
-            <button
-              onclick="selectCategory('super-admin', this)"
-              class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap"
-            >
-              01/SUPER_ADMIN (2)
-            </button>
-            <button
-              onclick="selectCategory('admin-panel', this)"
-              class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap"
-            >
-              02/ADMIN_PANEL (5)
-            </button>
-            <button
-              onclick="selectCategory('marketplace', this)"
-              class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap"
-            >
-              03/MARKETPLACE (5)
-            </button>
-            <button
-              onclick="selectCategory('iframe-integration', this)"
-              class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap"
-            >
-              04/IFRAME (1)
-            </button>
-          </div>
-
-          <!-- ENVIRONMENT FILTERS (PRODUCTION vs DEVELOPMENT) -->
-          <div class="flex items-center gap-2 overflow-x-auto pb-1">
-            <span class="mono-font text-[9px] text-nothingGray uppercase tracking-wider shrink-0 mr-1">ENV:</span>
-            <button
-              onclick="selectEnv('all', this)"
-              class="env-filter-btn mono-font text-[10px] sm:text-xs bg-white text-black font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap"
-            >
-              ALL ENVS
-            </button>
-            <button
-              onclick="selectEnv('production', this)"
-              class="env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-white border border-neutral-700 hover:border-neutral-500 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-nothingRed"></span>
-              PRODUCTION (5)
-            </button>
-            <button
-              onclick="selectEnv('development', this)"
-              class="env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-neutral-300 border border-neutral-800 hover:border-neutral-600 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
-              DEV & REFERENCES (8)
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- 01: SUPER ADMIN -->
-      <section class="section-container flex flex-col gap-4" data-category-section="super-admin">
-        <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-            <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
-              01 // SUPER_ADMIN
-            </h3>
-          </div>
-          <span class="mono-font text-[10px] text-nothingGray uppercase">PLATFORM_OPERATIONS</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Card 1 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="super-admin"
-            data-env="production" onclick="openLink('https://dashboard.bahlou.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
-                  PRODUCTION • PRIMARY
+        <!-- HERO SECTION -->
+        <section
+            class="bg-nothingCard border border-nothingBorder rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 flex flex-col gap-4 relative overflow-hidden">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-nothingRed rounded-full"></span>
+                <span class="mono-font text-[10px] sm:text-xs text-nothingRed font-bold tracking-widest uppercase">
+                    BAHLOU // DIGITAL ECOSYSTEM
                 </span>
-                <span class="mono-font text-[9px] text-nothingGray">DK NODE</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Super Admin Portal</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Central supervisory panel for multi-tenant controllers, user roles, system metrics, and billing logs.
-                </p>
-              </div>
-              <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-nothingLightGray flex items-center gap-2">
-                <span class="text-nothingRed">↳</span>
-                <span class="truncate">Both Fiind & Bahlou resolve to dashboard.bahlou.dk</span>
-              </div>
             </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://dashboard.bahlou.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://dashboard.bahlou.dk/', 'Super Admin Portal', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://dashboard.bahlou.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 2 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="super-admin"
-            data-env="development" onclick="openLink('https://fiind-dashboard-dev.netlify.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  DEVELOPMENT
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Super Admin Dev</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Active staging sandbox for testing dashboard modules, auth changes, and analytical graphs.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://fiind-dashboard-dev.netlify.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://fiind-dashboard-dev.netlify.app/', 'Super Admin Dev', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://fiind-dashboard-dev.netlify.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white uppercase mono-font">
+                <span class="text-nothingRed">BAHLOU.</span> NETWORK OF PORTALS.<br />
+                ENGINEERED FOR CLARITY.
+            </h2>
 
-      <!-- 02: ADMIN PANEL -->
-      <section class="section-container flex flex-col gap-4" data-category-section="admin-panel">
-        <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-            <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
-              02 // ADMIN_PANEL
-            </h3>
-          </div>
-          <span class="mono-font text-[10px] text-nothingGray uppercase">BUSINESS_CONTROLLER</span>
-        </div>
+            <p class="text-xs sm:text-sm text-nothingGray max-w-3xl leading-relaxed">
+                Centralized directory of production, staging, demo, and integration endpoints for the Bahlou and Fiind
+                platform architecture. Click any card to launch directly into the active system.
+            </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Merged Card: Bahlou Admin & Fiind Admin -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="admin-panel"
-            data-env="production" onclick="openLink('https://admin.bahlou.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
-                  PRODUCTION • UNIFIED
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">BAHLOU + FIIND</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Bahlou & Fiind Admin</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Unified administrative control portal for staff, appointments, POS cash register, and tenant operations. Both domains run the same system.
-                </p>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-white flex items-center justify-between">
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span>✓</span>
-                    <span class="truncate">Primary: admin.bahlou.app / admin.bahlou.dk</span>
-                  </div>
-                  <span class="text-[9px] text-nothingGray shrink-0 ml-1">DIRECT</span>
+            <!-- FILTER BARS (CATEGORIES & ENVIRONMENT) -->
+            <div class="flex flex-col gap-3 pt-4 border-t border-nothingBorder">
+                <!-- CATEGORY FILTERS -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                    <span
+                        class="mono-font text-[9px] text-nothingGray uppercase tracking-wider shrink-0 mr-1">PORTAL:</span>
+                    <button onclick="selectCategory('all', this)"
+                        class="category-btn mono-font text-[10px] sm:text-xs bg-nothingRed text-black font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap">
+                        ALL (13)
+                    </button>
+                    <button onclick="selectCategory('super-admin', this)"
+                        class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap">
+                        01/SUPER_ADMIN (2)
+                    </button>
+                    <button onclick="selectCategory('admin-panel', this)"
+                        class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap">
+                        02/ADMIN_PANEL (5)
+                    </button>
+                    <button onclick="selectCategory('marketplace', this)"
+                        class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap">
+                        03/MARKETPLACE (5)
+                    </button>
+                    <button onclick="selectCategory('iframe-integration', this)"
+                        class="category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap">
+                        04/IFRAME (1)
+                    </button>
                 </div>
-                <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center justify-between">
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span>↳</span>
-                    <span class="truncate">Legacy: admin.fiind.app</span>
-                  </div>
-                  <span class="text-[9px] text-neutral-300/80 shrink-0 ml-1">AUTO REDIRECT</span>
+
+                <!-- ENVIRONMENT FILTERS (PRODUCTION vs DEVELOPMENT) -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                    <span
+                        class="mono-font text-[9px] text-nothingGray uppercase tracking-wider shrink-0 mr-1">ENV:</span>
+                    <button onclick="selectEnv('all', this)"
+                        class="env-filter-btn mono-font text-[10px] sm:text-xs bg-white text-black font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap">
+                        ALL ENVS
+                    </button>
+                    <button onclick="selectEnv('production', this)"
+                        class="env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-white border border-neutral-700 hover:border-neutral-500 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-nothingRed"></span>
+                        PRODUCTION (5)
+                    </button>
+                    <button onclick="selectEnv('development', this)"
+                        class="env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-neutral-300 border border-neutral-800 hover:border-neutral-600 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                        DEV & REFERENCES (8)
+                    </button>
                 </div>
-              </div>
             </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://admin.bahlou.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://admin.bahlou.app/', 'Bahlou & Fiind Admin', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://admin.bahlou.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+        </section>
 
-          <!-- Card 5 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="admin-panel"
-            data-env="development" onclick="openLink('https://fiind-admin-dev.netlify.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  DEVELOPMENT
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">NETLIFY CI</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Fiind Admin Dev</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Continuous deployment build for testing newly implemented POS features and API integrations.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://fiind-admin-dev.netlify.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://fiind-admin-dev.netlify.app/', 'Fiind Admin Dev', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://fiind-admin-dev.netlify.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="admin-panel"
-            data-env="development" onclick="openLink('https://bahlou-admin-dev.netlify.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  BETA • DEVELOPMENT
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Bahlou Admin Dev</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Bahlou branded administrative environment for internal QA verification prior to production rollout.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou-admin-dev.netlify.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://bahlou-admin-dev.netlify.app/', 'Bahlou Admin Dev', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://bahlou-admin-dev.netlify.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 7 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="admin-panel"
-            data-env="production" onclick="openLink('https://beta-admin.bahlou.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  PRODUCTION • CANARY
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">BETA ADMIN</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Beta Admin</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Canary production release candidate on the Denmark national domain with preview testing modules.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://beta-admin.bahlou.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://beta-admin.bahlou.dk/', 'Beta Admin Danish', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://beta-admin.bahlou.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 8 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="admin-panel"
-            data-env="development" onclick="openLink('https://bahloudemo.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  CLIENT DEMO
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">LOVABLE</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Client Demo Reference</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Interactive showcase setup for prospect walkthroughs and client onboarding demonstrations.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahloudemo.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://bahloudemo.dk/', 'Client Demo Reference', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://bahloudemo.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 03: MARKETPLACE -->
-      <section class="section-container flex flex-col gap-4" data-category-section="marketplace">
-        <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-            <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
-              03 // MARKETPLACE
-            </h3>
-          </div>
-          <span class="mono-font text-[10px] text-nothingGray uppercase">CUSTOMER_STOREFRONTS</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Merged Card: Bahlou Marketplace & Fiind Marketplace -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="marketplace"
-            data-env="production" onclick="openLink('https://bahlou.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
-                  PRODUCTION • UNIFIED
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">BAHLOU + FIIND</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Bahlou & Fiind Marketplace</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Main consumer booking and discovery platform for salon and wellness services. Both domain entries route to the unified storefront.
-                </p>
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-white flex items-center justify-between">
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span>✓</span>
-                    <span class="truncate">Primary: https://bahlou.dk/</span>
-                  </div>
-                  <span class="text-[9px] text-nothingGray shrink-0 ml-1">DIRECT</span>
+        <!-- 01: SUPER ADMIN -->
+        <section class="section-container flex flex-col gap-4" data-category-section="super-admin">
+            <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                    <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
+                        01 // SUPER_ADMIN
+                    </h3>
                 </div>
-                <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center justify-between">
-                  <div class="flex items-center gap-1.5 truncate">
-                    <span>↳</span>
-                    <span class="truncate">Legacy: http://fiind.app/</span>
-                  </div>
-                  <span class="text-[9px] text-neutral-300/80 shrink-0 ml-1">AUTO REDIRECT</span>
+                <span class="mono-font text-[10px] text-nothingGray uppercase">PLATFORM_OPERATIONS</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="super-admin" data-env="production"
+                    onclick="openLink('https://dashboard.bahlou.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
+                                PRODUCTION • PRIMARY
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">DK NODE</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Super Admin Portal</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Central supervisory panel for multi-tenant controllers, user roles, system metrics, and
+                                billing logs.
+                            </p>
+                        </div>
+                        <div
+                            class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-nothingLightGray flex items-center gap-2">
+                            <span class="text-nothingRed">↳</span>
+                            <span class="truncate">Both Fiind & Bahlou resolve to dashboard.bahlou.dk</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://dashboard.bahlou.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://dashboard.bahlou.dk/', 'Super Admin Portal', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://dashboard.bahlou.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://bahlou.dk/', 'Bahlou & Fiind Marketplace', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://bahlou.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <!-- New Card: Beta Marketplace (beta.bahlou.dk) -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="marketplace"
-            data-env="production" onclick="openLink('https://beta.bahlou.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  PRODUCTION • CANARY
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">BETA MARKETPLACE</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Beta Marketplace</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Next-generation Bahlou marketplace preview environment with redesigned customer booking journey and updated search algorithms.
-                </p>
-              </div>
-              <div class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center gap-2">
-                <span>⚡</span>
-                <span class="truncate">New Marketplace Canary: beta.bahlou.dk</span>
-              </div>
+                <!-- Card 2 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="super-admin" data-env="development"
+                    onclick="openLink('https://fiind-dashboard-dev.netlify.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                DEVELOPMENT
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Super Admin Dev</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Active staging sandbox for testing dashboard modules, auth changes, and analytical
+                                graphs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://fiind-dashboard-dev.netlify.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://fiind-dashboard-dev.netlify.app/', 'Super Admin Dev', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://fiind-dashboard-dev.netlify.app/', event)"
+                                title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://beta.bahlou.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://beta.bahlou.dk/', 'Beta Marketplace', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://beta.bahlou.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+        </section>
 
-          <!-- Card 11 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="marketplace"
-            data-env="development" onclick="openLink('https://mp-dev.fiind.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  DEVELOPMENT
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">FIIND SUBDOMAIN</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Marketplace Dev (MP-Dev)</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Active engineering testbed for consumer booking journeys, payments, and localization.
-                </p>
-              </div>
+        <!-- 02: ADMIN PANEL -->
+        <section class="section-container flex flex-col gap-4" data-category-section="admin-panel">
+            <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                    <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
+                        02 // ADMIN_PANEL
+                    </h3>
+                </div>
+                <span class="mono-font text-[10px] text-nothingGray uppercase">BUSINESS_CONTROLLER</span>
             </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://mp-dev.fiind.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://mp-dev.fiind.app/', 'Marketplace Dev', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://mp-dev.fiind.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 12 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="marketplace"
-            data-env="development" onclick="openLink('https://bahlou-marketplace-dev.netlify.app/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  BETA • DEVELOPMENT
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Bahlou Marketplace Dev</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Bahlou customer storefront continuous integration staging with latest UI treatments and widgets.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou-marketplace-dev.netlify.app/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://bahlou-marketplace-dev.netlify.app/', 'Bahlou Marketplace Dev', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://bahlou-marketplace-dev.netlify.app/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Merged Card: Bahlou Admin & Fiind Admin -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="admin-panel" data-env="production"
+                    onclick="openLink('https://admin.bahlou.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
+                                PRODUCTION • UNIFIED
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">BAHLOU + FIIND</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Bahlou & Fiind Admin</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Unified administrative control portal for staff, appointments, POS cash register, and
+                                tenant operations. Both domains run the same system.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <div
+                                class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-white flex items-center justify-between">
+                                <div class="flex items-center gap-1.5 truncate">
+                                    <span>✓</span>
+                                    <span class="truncate">Primary: admin.bahlou.app / admin.bahlou.dk</span>
+                                </div>
+                                <span class="text-[9px] text-nothingGray shrink-0 ml-1">DIRECT</span>
+                            </div>
+                            <div
+                                class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center justify-between">
+                                <div class="flex items-center gap-1.5 truncate">
+                                    <span>↳</span>
+                                    <span class="truncate">Legacy: admin.fiind.app</span>
+                                </div>
+                                <span class="text-[9px] text-neutral-300/80 shrink-0 ml-1">AUTO REDIRECT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://admin.bahlou.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://admin.bahlou.app/', 'Bahlou & Fiind Admin', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://admin.bahlou.app/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-          <!-- Card 13 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="marketplace"
-            data-env="development" onclick="openLink('https://booking.bahloudemo.dk/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  CLIENT REFERENCE
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">LOVABLE</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Booking Demo Experience</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Interactive consumer booking journey template and UX reference architecture for partners.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://booking.bahloudemo.dk/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://booking.bahloudemo.dk/', 'Booking Demo Experience', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://booking.bahloudemo.dk/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                <!-- Card 5 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="admin-panel" data-env="development"
+                    onclick="openLink('https://fiind-admin-dev.netlify.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                DEVELOPMENT
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">NETLIFY CI</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Fiind Admin Dev</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Continuous deployment build for testing newly implemented POS features and API
+                                integrations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://fiind-admin-dev.netlify.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://fiind-admin-dev.netlify.app/', 'Fiind Admin Dev', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://fiind-admin-dev.netlify.app/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- 04: IFRAME & INTEGRATION -->
-      <section class="section-container flex flex-col gap-4" data-category-section="iframe-integration">
-        <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-            <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
-              04 // IFRAME & INTEGRATION
-            </h3>
-          </div>
-          <span class="mono-font text-[10px] text-nothingGray uppercase">EMBEDDABLE_SANDBOX</span>
-        </div>
+                <!-- Card 6 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="admin-panel" data-env="development"
+                    onclick="openLink('https://bahlou-admin-dev.netlify.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                BETA • DEVELOPMENT
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Bahlou Admin Dev</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Bahlou branded administrative environment for internal QA verification prior to
+                                production rollout.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou-admin-dev.netlify.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://bahlou-admin-dev.netlify.app/', 'Bahlou Admin Dev', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://bahlou-admin-dev.netlify.app/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Card 14 -->
-          <div
-            class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
-            data-category="iframe-integration"
-            data-env="development" onclick="openLink('https://mukund2074.github.io/fiind-iframe/', event)"
-          >
-            <div class="flex flex-col gap-3">
-              <div class="flex items-center justify-between">
-                <span class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
-                  INTEGRATION TEST
-                </span>
-                <span class="mono-font text-[9px] text-nothingGray">GITHUB PAGES</span>
-              </div>
-              <div>
-                <h4 class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
-                  <span>Fiind Iframe Testing</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
-                </h4>
-                <p class="text-xs text-nothingGray mt-1 leading-relaxed">
-                  Host runner for testing embeddable booking widgets, postMessage synchronization, and dynamic resizing.
-                </p>
-              </div>
+                <!-- Card 7 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="admin-panel" data-env="production"
+                    onclick="openLink('https://beta-admin.bahlou.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                PRODUCTION • CANARY
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">BETA ADMIN</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Beta Admin</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Canary production release candidate on the Denmark national domain with preview testing
+                                modules.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://beta-admin.bahlou.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://beta-admin.bahlou.dk/', 'Beta Admin Danish', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://beta-admin.bahlou.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="admin-panel" data-env="development"
+                    onclick="openLink('https://bahloudemo.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                CLIENT DEMO
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">LOVABLE</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Client Demo Reference</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Interactive showcase setup for prospect walkthroughs and client onboarding
+                                demonstrations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahloudemo.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://bahloudemo.dk/', 'Client Demo Reference', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://bahloudemo.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
-              <span class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://mukund2074.github.io/fiind-iframe/</span>
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button
-                  onclick="previewModal('https://mukund2074.github.io/fiind-iframe/', 'Fiind Iframe Testing', event)"
-                  title="Preview"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </button>
-                <button
-                  onclick="copyUrl('https://mukund2074.github.io/fiind-iframe/', event)"
-                  title="Copy URL"
-                  class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs"
-                >
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-              </div>
+        </section>
+
+        <!-- 03: MARKETPLACE -->
+        <section class="section-container flex flex-col gap-4" data-category-section="marketplace">
+            <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                    <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
+                        03 // MARKETPLACE
+                    </h3>
+                </div>
+                <span class="mono-font text-[10px] text-nothingGray uppercase">CUSTOMER_STOREFRONTS</span>
             </div>
-          </div>
-        </div>
-      </section>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Merged Card: Bahlou Marketplace & Fiind Marketplace -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="marketplace" data-env="production" onclick="openLink('https://bahlou.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-white border border-neutral-700 uppercase tracking-wider">
+                                PRODUCTION • UNIFIED
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">BAHLOU + FIIND</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Bahlou & Fiind Marketplace</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Main consumer booking and discovery platform for salon and wellness services. Both
+                                domain entries route to the unified storefront.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <div
+                                class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-white flex items-center justify-between">
+                                <div class="flex items-center gap-1.5 truncate">
+                                    <span>✓</span>
+                                    <span class="truncate">Primary: https://bahlou.dk/</span>
+                                </div>
+                                <span class="text-[9px] text-nothingGray shrink-0 ml-1">DIRECT</span>
+                            </div>
+                            <div
+                                class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center justify-between">
+                                <div class="flex items-center gap-1.5 truncate">
+                                    <span>↳</span>
+                                    <span class="truncate">Legacy: http://fiind.app/</span>
+                                </div>
+                                <span class="text-[9px] text-neutral-300/80 shrink-0 ml-1">AUTO REDIRECT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://bahlou.dk/', 'Bahlou & Fiind Marketplace', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://bahlou.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Card: Beta Marketplace (beta.bahlou.dk) -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="marketplace" data-env="production"
+                    onclick="openLink('https://beta.bahlou.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                PRODUCTION • CANARY
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">BETA MARKETPLACE</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Beta Marketplace</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Next-generation Bahlou marketplace preview environment with redesigned customer booking
+                                journey and updated search algorithms.
+                            </p>
+                        </div>
+                        <div
+                            class="mono-font text-[10px] bg-nothingBlack p-2 rounded-[4px] border border-nothingBorder text-neutral-300 flex items-center gap-2">
+                            <span>⚡</span>
+                            <span class="truncate">New Marketplace Canary: beta.bahlou.dk</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://beta.bahlou.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://beta.bahlou.dk/', 'Beta Marketplace', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://beta.bahlou.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 11 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="marketplace" data-env="development"
+                    onclick="openLink('https://mp-dev.fiind.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                DEVELOPMENT
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">FIIND SUBDOMAIN</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Marketplace Dev (MP-Dev)</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Active engineering testbed for consumer booking journeys, payments, and localization.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://mp-dev.fiind.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button onclick="previewModal('https://mp-dev.fiind.app/', 'Marketplace Dev', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://mp-dev.fiind.app/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 12 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="marketplace" data-env="development"
+                    onclick="openLink('https://bahlou-marketplace-dev.netlify.app/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                BETA • DEVELOPMENT
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">NETLIFY</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Bahlou Marketplace Dev</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Bahlou customer storefront continuous integration staging with latest UI treatments and
+                                widgets.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://bahlou-marketplace-dev.netlify.app/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://bahlou-marketplace-dev.netlify.app/', 'Bahlou Marketplace Dev', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://bahlou-marketplace-dev.netlify.app/', event)"
+                                title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 13 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="marketplace" data-env="development"
+                    onclick="openLink('https://booking.bahloudemo.dk/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                CLIENT REFERENCE
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">LOVABLE</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Booking Demo Experience</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Interactive consumer booking journey template and UX reference architecture for
+                                partners.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://booking.bahloudemo.dk/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://booking.bahloudemo.dk/', 'Booking Demo Experience', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://booking.bahloudemo.dk/', event)" title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04: IFRAME & INTEGRATION -->
+        <section class="section-container flex flex-col gap-4" data-category-section="iframe-integration">
+            <div class="flex items-center justify-between border-b border-nothingBorder pb-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                    <h3 class="mono-font font-bold text-xs sm:text-sm tracking-wider uppercase text-white">
+                        04 // IFRAME & INTEGRATION
+                    </h3>
+                </div>
+                <span class="mono-font text-[10px] text-nothingGray uppercase">EMBEDDABLE_SANDBOX</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Card 14 -->
+                <div class="site-card bg-nothingCard hover:bg-nothingCardHover border border-nothingBorder hover:border-nothingBorderHover hover:border-l-nothingRed hover:border-l-2 rounded-[18px] sm:rounded-[22px] p-5 flex flex-col justify-between gap-4 transition group cursor-pointer"
+                    data-category="iframe-integration" data-env="development"
+                    onclick="openLink('https://mukund2074.github.io/fiind-iframe/', event)">
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="mono-font text-[9px] font-bold px-2 py-0.5 rounded-[3px] bg-neutral-900 text-neutral-300 border border-neutral-800 uppercase tracking-wider">
+                                INTEGRATION TEST
+                            </span>
+                            <span class="mono-font text-[9px] text-nothingGray">GITHUB PAGES</span>
+                        </div>
+                        <div>
+                            <h4
+                                class="font-bold text-base sm:text-lg text-white group-hover:text-nothingRed transition flex items-center justify-between">
+                                <span>Fiind Iframe Testing</span>
+                                <i
+                                    class="fa-solid fa-arrow-up-right-from-square text-xs text-nothingGray group-hover:text-nothingRed transition"></i>
+                            </h4>
+                            <p class="text-xs text-nothingGray mt-1 leading-relaxed">
+                                Host runner for testing embeddable booking widgets, postMessage synchronization, and
+                                dynamic resizing.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-nothingBorder/60">
+                        <span
+                            class="mono-font text-[10px] text-nothingGray truncate max-w-[200px]">https://mukund2074.github.io/fiind-iframe/</span>
+                        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
+                            <button
+                                onclick="previewModal('https://mukund2074.github.io/fiind-iframe/', 'Fiind Iframe Testing', event)"
+                                title="Preview"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button onclick="copyUrl('https://mukund2074.github.io/fiind-iframe/', event)"
+                                title="Copy URL"
+                                class="w-7 h-7 bg-nothingBlack hover:bg-nothingRed hover:text-black text-nothingLightGray rounded-[4px] border border-nothingBorder flex items-center justify-center transition text-xs">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
     <!-- INTERACTIVE PREVIEW DRAWER / MODAL -->
-    <div
-      id="previewBackdrop"
-      class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6"
-      onclick="closePreviewModal(event)"
-    >
-      <div
-        class="w-full max-w-5xl h-[85vh] bg-nothingCard border border-nothingBorder rounded-[20px] sm:rounded-[24px] overflow-hidden flex flex-col shadow-2xl"
-        onclick="event.stopPropagation()"
-      >
-        <div class="h-12 border-b border-nothingBorder px-4 flex items-center justify-between bg-nothingBlack">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 bg-nothingRed rounded-full"></span>
-            <span id="modalSiteTitle" class="mono-font text-xs font-bold uppercase text-white truncate max-w-[200px] sm:max-w-xs">PREVIEW</span>
-          </div>
-          <div class="mono-font text-[10px] text-nothingGray hidden sm:block truncate max-w-sm px-2 py-0.5 bg-nothingCard rounded border border-nothingBorder" id="modalUrlText">
-            url
-          </div>
-          <div class="flex items-center gap-2">
-            <button
-              onclick="openExternalFromModal()"
-              class="mono-font text-[10px] bg-nothingRed hover:bg-nothingRedHover text-black font-bold uppercase px-3 py-1 rounded-[4px] transition"
-            >
-              LAUNCH ↗
-            </button>
-            <button
-              onclick="closePreviewModalForce()"
-              class="w-7 h-7 flex items-center justify-center text-nothingGray hover:text-white text-sm"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
+    <div id="previewBackdrop"
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-6"
+        onclick="closePreviewModal(event)">
+        <div class="w-full max-w-5xl h-[85vh] bg-nothingCard border border-nothingBorder rounded-[20px] sm:rounded-[24px] overflow-hidden flex flex-col shadow-2xl"
+            onclick="event.stopPropagation()">
+            <div class="h-12 border-b border-nothingBorder px-4 flex items-center justify-between bg-nothingBlack">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-nothingRed rounded-full"></span>
+                    <span id="modalSiteTitle"
+                        class="mono-font text-xs font-bold uppercase text-white truncate max-w-[200px] sm:max-w-xs">PREVIEW</span>
+                </div>
+                <div class="mono-font text-[10px] text-nothingGray hidden sm:block truncate max-w-sm px-2 py-0.5 bg-nothingCard rounded border border-nothingBorder"
+                    id="modalUrlText">
+                    url
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openExternalFromModal()"
+                        class="mono-font text-[10px] bg-nothingRed hover:bg-nothingRedHover text-black font-bold uppercase px-3 py-1 rounded-[4px] transition">
+                        LAUNCH ↗
+                    </button>
+                    <button onclick="closePreviewModalForce()"
+                        class="w-7 h-7 flex items-center justify-center text-nothingGray hover:text-white text-sm">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow bg-white relative">
+                <iframe id="previewIframe" src="about:blank" class="w-full h-full border-0"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+                <div id="fallbackNotice"
+                    class="absolute inset-0 bg-nothingBlack flex flex-col items-center justify-center p-6 text-center gap-3 hidden">
+                    <span class="mono-font text-xs text-nothingRed font-bold uppercase tracking-wider">SANDBOX
+                        NOTICE</span>
+                    <p class="text-xs text-nothingGray max-w-md">Portal requires direct browser launch due to CSP
+                        protection.</p>
+                    <button onclick="openExternalFromModal()"
+                        class="mono-font text-xs bg-nothingRed text-black font-bold px-4 py-2 rounded-[4px] uppercase">
+                        LAUNCH DIRECTLY ↗
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="flex-grow bg-white relative">
-          <iframe id="previewIframe" src="about:blank" class="w-full h-full border-0" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
-          <div id="fallbackNotice" class="absolute inset-0 bg-nothingBlack flex flex-col items-center justify-center p-6 text-center gap-3 hidden">
-            <span class="mono-font text-xs text-nothingRed font-bold uppercase tracking-wider">SANDBOX NOTICE</span>
-            <p class="text-xs text-nothingGray max-w-md">Portal requires direct browser launch due to CSP protection.</p>
-            <button onclick="openExternalFromModal()" class="mono-font text-xs bg-nothingRed text-black font-bold px-4 py-2 rounded-[4px] uppercase">
-              LAUNCH DIRECTLY ↗
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="border-t border-nothingBorder py-6 bg-nothingBlack/90 mt-12">
-      <div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-nothingGray text-xs mono-font">
-        <div class="flex items-center gap-2">
-          <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
-          <span>BAHLOU // FIIND ECOSYSTEM (2026.10)</span>
-          <span class="text-neutral-700">|</span>
-          <a
-            href="https://github.com/Mukund2074/Bahlou-manager"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-neutral-400 hover:text-white flex items-center gap-1.5 transition"
-          >
-            <i class="fa-brands fa-github text-xs"></i>
-            <span>Bahlou-manager</span>
-          </a>
+        <div
+            class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-nothingGray text-xs mono-font">
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-nothingRed rounded-full"></span>
+                <span>BAHLOU // FIIND ECOSYSTEM (2026.10)</span>
+                <span class="text-neutral-700">|</span>
+                <a href="https://github.com/Mukund2074/Bahlou-manager" target="_blank" rel="noopener noreferrer"
+                    class="text-neutral-400 hover:text-white flex items-center gap-1.5 transition">
+                    <i class="fa-brands fa-github text-xs"></i>
+                    <span>Bahlou-manager</span>
+                </a>
+            </div>
+            <div class="text-[10px] uppercase flex items-center gap-3">
+                <a href="https://github.com/Mukund2074" target="_blank" rel="noopener noreferrer"
+                    class="text-neutral-400 hover:text-white transition">
+                    MAINTAINED BY @Mukund2074
+                </a>
+                <span class="text-neutral-700">•</span>
+            </div>
         </div>
-        <div class="text-[10px] uppercase flex items-center gap-3">
-          <a
-            href="https://github.com/Mukund2074"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-neutral-400 hover:text-white transition"
-          >
-            MAINTAINED BY @Mukund2074
-          </a>
-          <span class="text-neutral-700">•</span>
-          <span>INSPIRED BY NOTHING OS</span>
-        </div>
-      </div>
     </footer>
 
     <!-- SCRIPTS -->
     <script>
-      let currentActiveUrl = '';
+        let currentActiveUrl = '';
 
-      function openLink(url, event) {
-        if (event) event.stopPropagation();
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
-
-      function copyUrl(url, event) {
-        if (event) event.stopPropagation();
-        navigator.clipboard.writeText(url).then(() => {
-          showToast('COPIED: ' + url);
-        }).catch(() => {
-          const temp = document.createElement('input');
-          temp.value = url;
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand('copy');
-          document.body.removeChild(temp);
-          showToast('COPIED: ' + url);
-        });
-      }
-
-      function showToast(message) {
-        const toast = document.getElementById('toast');
-        document.getElementById('toast-message').textContent = message;
-        toast.classList.remove('translate-y-24', 'opacity-0');
-        toast.classList.add('translate-y-0', 'opacity-100');
-        setTimeout(() => {
-          toast.classList.add('translate-y-24', 'opacity-0');
-          toast.classList.remove('translate-y-0', 'opacity-100');
-        }, 2200);
-      }
-
-      function previewModal(url, title, event) {
-        if (event) event.stopPropagation();
-        currentActiveUrl = url;
-        const backdrop = document.getElementById('previewBackdrop');
-        const modalTitle = document.getElementById('modalSiteTitle');
-        const modalUrl = document.getElementById('modalUrlText');
-        const iframe = document.getElementById('previewIframe');
-        const fallback = document.getElementById('fallbackNotice');
-
-        modalTitle.textContent = title;
-        modalUrl.textContent = url;
-        fallback.classList.add('hidden');
-        backdrop.classList.remove('hidden');
-        backdrop.classList.add('flex');
-        iframe.src = url;
-
-        iframe.onerror = function() {
-          fallback.classList.remove('hidden');
-        };
-      }
-
-      function closePreviewModal(event) {
-        if (event.target === document.getElementById('previewBackdrop')) {
-          closePreviewModalForce();
+        function openLink(url, event) {
+            if (event) event.stopPropagation();
+            window.open(url, '_blank', 'noopener,noreferrer');
         }
-      }
 
-      function closePreviewModalForce() {
-        const backdrop = document.getElementById('previewBackdrop');
-        const iframe = document.getElementById('previewIframe');
-        backdrop.classList.add('hidden');
-        backdrop.classList.remove('flex');
-        iframe.src = 'about:blank';
-      }
-
-      function openExternalFromModal() {
-        if (currentActiveUrl) {
-          window.open(currentActiveUrl, '_blank', 'noopener,noreferrer');
+        function copyUrl(url, event) {
+            if (event) event.stopPropagation();
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('COPIED: ' + url);
+            }).catch(() => {
+                const temp = document.createElement('input');
+                temp.value = url;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                document.body.removeChild(temp);
+                showToast('COPIED: ' + url);
+            });
         }
-      }
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closePreviewModalForce();
-      });
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2200);
+        }
 
-      let activeCategory = 'all';
-      let activeEnv = 'all';
+        function previewModal(url, title, event) {
+            if (event) event.stopPropagation();
+            currentActiveUrl = url;
+            const backdrop = document.getElementById('previewBackdrop');
+            const modalTitle = document.getElementById('modalSiteTitle');
+            const modalUrl = document.getElementById('modalUrlText');
+            const iframe = document.getElementById('previewIframe');
+            const fallback = document.getElementById('fallbackNotice');
 
-      function selectCategory(category, btn) {
-        activeCategory = category;
-        document.querySelectorAll('.category-btn').forEach(b => {
-          b.className = 'category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap';
-        });
-        btn.className = 'category-btn mono-font text-[10px] sm:text-xs bg-nothingRed text-black font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap';
-        applyFilters();
-      }
+            modalTitle.textContent = title;
+            modalUrl.textContent = url;
+            fallback.classList.add('hidden');
+            backdrop.classList.remove('hidden');
+            backdrop.classList.add('flex');
+            iframe.src = url;
 
-      function selectEnv(env, btn) {
-        activeEnv = env;
-        document.querySelectorAll('.env-filter-btn').forEach(b => {
-          if (b.textContent.includes('PRODUCTION')) {
-            b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-white border border-neutral-700 hover:border-neutral-500 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
-          } else if (b.textContent.includes('DEV')) {
-            b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-neutral-300 border border-neutral-800 hover:border-neutral-600 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
-          } else {
-            b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap';
-          }
-        });
-        btn.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-white text-black font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
-        applyFilters();
-      }
+            iframe.onerror = function () {
+                fallback.classList.remove('hidden');
+            };
+        }
 
-      function applyFilters() {
-        const query = document.getElementById('searchInput').value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.site-card');
-        const sections = document.querySelectorAll('[data-category-section]');
-        let count = 0;
+        function closePreviewModal(event) {
+            if (event.target === document.getElementById('previewBackdrop')) {
+                closePreviewModalForce();
+            }
+        }
 
-        cards.forEach(card => {
-          const cardCat = card.getAttribute('data-category');
-          const cardEnv = card.getAttribute('data-env') || 'development';
-          const cardText = card.textContent.toLowerCase();
+        function closePreviewModalForce() {
+            const backdrop = document.getElementById('previewBackdrop');
+            const iframe = document.getElementById('previewIframe');
+            backdrop.classList.add('hidden');
+            backdrop.classList.remove('flex');
+            iframe.src = 'about:blank';
+        }
 
-          const catMatches = (activeCategory === 'all' || cardCat === activeCategory);
-          const envMatches = (activeEnv === 'all' || cardEnv === activeEnv);
-          const queryMatches = (!query || cardText.includes(query));
+        function openExternalFromModal() {
+            if (currentActiveUrl) {
+                window.open(currentActiveUrl, '_blank', 'noopener,noreferrer');
+            }
+        }
 
-          if (catMatches && envMatches && queryMatches) {
-            card.style.display = 'flex';
-            count++;
-          } else {
-            card.style.display = 'none';
-          }
-        });
-
-        sections.forEach(section => {
-          const secCat = section.getAttribute('data-category-section');
-          const hasVisible = Array.from(section.querySelectorAll('.site-card')).some(c => c.style.display !== 'none');
-          if (hasVisible && (activeCategory === 'all' || secCat === activeCategory)) {
-            section.style.display = 'flex';
-          } else {
-            section.style.display = 'none';
-          }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePreviewModalForce();
         });
 
-        document.getElementById('activeCountBadge').textContent = `${count} ENDPOINTS`;
-      }
+        let activeCategory = 'all';
+        let activeEnv = 'all';
 
-      function filterCards() {
-        applyFilters();
-      }
+        function selectCategory(category, btn) {
+            activeCategory = category;
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.className = 'category-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap';
+            });
+            btn.className = 'category-btn mono-font text-[10px] sm:text-xs bg-nothingRed text-black font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-[4px] transition whitespace-nowrap';
+            applyFilters();
+        }
+
+        function selectEnv(env, btn) {
+            activeEnv = env;
+            document.querySelectorAll('.env-filter-btn').forEach(b => {
+                if (b.textContent.includes('PRODUCTION')) {
+                    b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-white border border-neutral-700 hover:border-neutral-500 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
+                } else if (b.textContent.includes('DEV')) {
+                    b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-neutral-300 border border-neutral-800 hover:border-neutral-600 font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
+                } else {
+                    b.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-nothingBlack hover:bg-nothingCardHover text-nothingLightGray border border-nothingBorder hover:border-nothingBorderHover font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap';
+                }
+            });
+            btn.className = 'env-filter-btn mono-font text-[10px] sm:text-xs bg-white text-black font-bold uppercase tracking-wider px-3 py-1 rounded-[4px] transition whitespace-nowrap flex items-center gap-1.5';
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.site-card');
+            const sections = document.querySelectorAll('[data-category-section]');
+            let count = 0;
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                const cardEnv = card.getAttribute('data-env') || 'development';
+                const cardText = card.textContent.toLowerCase();
+
+                const catMatches = (activeCategory === 'all' || cardCat === activeCategory);
+                const envMatches = (activeEnv === 'all' || cardEnv === activeEnv);
+                const queryMatches = (!query || cardText.includes(query));
+
+                if (catMatches && envMatches && queryMatches) {
+                    card.style.display = 'flex';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            sections.forEach(section => {
+                const secCat = section.getAttribute('data-category-section');
+                const hasVisible = Array.from(section.querySelectorAll('.site-card')).some(c => c.style.display !== 'none');
+                if (hasVisible && (activeCategory === 'all' || secCat === activeCategory)) {
+                    section.style.display = 'flex';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            document.getElementById('activeCountBadge').textContent = `${count} ENDPOINTS`;
+        }
+
+        function filterCards() {
+            applyFilters();
+        }
     </script>
-  </body>
+</body>
+
 </html>
